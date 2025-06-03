@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { useVideoPlayer, VideoView } from 'expo-video'
+import { useEffect, useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useVideoPlayer, VideoView } from 'expo-video';
+import { useFocusEffect } from 'expo-router';
+import { useCallback } from 'react';
 
 const VideoComponent = ({ videoUri, shouldPlay }) => {
   const player = useVideoPlayer(videoUri, (player) => {
@@ -10,9 +12,25 @@ const VideoComponent = ({ videoUri, shouldPlay }) => {
     }
   });
 
+  // Focus/blur handling
+  useFocusEffect(
+    useCallback(() => {
+      // When screen is focused
+      if (shouldPlay) {
+        player.play();
+      }
+
+      // When screen is unfocused
+      return () => {
+        player.pause();
+      };
+    }, [shouldPlay])
+  );
+
+  // Handle `shouldPlay` prop change
   useEffect(() => {
     if (shouldPlay) {
-      player.play();
+      player.replay();
     } else {
       player.pause();
     }
@@ -20,12 +38,17 @@ const VideoComponent = ({ videoUri, shouldPlay }) => {
 
   return (
     <View style={styles.container}>
-      <VideoView style={styles.video} player={player} allowsFullscreen allowsPictureInPicture />
+      <VideoView
+        style={styles.video}
+        player={player}
+        allowsFullscreen
+        allowsPictureInPicture
+      />
     </View>
-  )
-}
+  );
+};
 
-export default VideoComponent
+export default VideoComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -33,6 +56,6 @@ const styles = StyleSheet.create({
   },
   video: {
     width: '100%',
-    height: '100%',
+    height: '70%',
   },
-})
+});

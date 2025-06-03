@@ -8,10 +8,10 @@ import VideoComponent from '../components/VideoComponent'
 const { height, width } = Dimensions.get('window')
 
 const videos = [
-  { id: '1', videoUri: video1 },
-  { id: '2', videoUri: video2 },
-  { id: '3', videoUri: video3 },
-]
+  { id: '1', videoUri: video1, profileId: '1' },
+  { id: '2', videoUri: video2, profileId: '2' },
+  { id: '3', videoUri: video3, profileId: '3' },
+];
 
 const Feed = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -27,13 +27,15 @@ const Feed = () => {
   }
 
   const renderItem = ({ item, index }) => (
-    <View style={{ height, width }}>
-      <VideoComponent videoUri={item.videoUri} shouldPlay={index === currentIndex} />
-    </View>
-  )
+  <View style={styles.itemContainer}>
+    <VideoComponent profileId={item.profileId} videoUri={item.videoUri} shouldPlay={index === currentIndex} />
+  </View>
+)
+
 
   return (
     <FlatList
+      contentContainerStyle={{padding: 0, margin: 0, backgroundColor: 'black'}}
       data={videos}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
@@ -50,8 +52,20 @@ const Feed = () => {
         offset: height * index,
         index,
       })}
+      extraData={currentIndex}
     />
+    
   )
 }
 
 export default Feed
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    height,
+    width,
+    flex: 1,
+    padding: 0,
+    margin: 0,
+  },
+});

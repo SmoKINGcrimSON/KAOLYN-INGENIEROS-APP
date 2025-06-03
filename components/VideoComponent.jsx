@@ -1,10 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
+import VideoFeed from './VideoFeed';
 
-const VideoComponent = ({ videoUri, shouldPlay }) => {
+const VideoComponent = ({ profileId, videoUri, shouldPlay }) => {
+
   const player = useVideoPlayer(videoUri, (player) => {
     player.loop = true;
     if (shouldPlay) {
@@ -44,6 +46,7 @@ const VideoComponent = ({ videoUri, shouldPlay }) => {
         allowsFullscreen
         allowsPictureInPicture
       />
+      <VideoFeed id={profileId}/>
     </View>
   );
 };
@@ -53,9 +56,11 @@ export default VideoComponent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    overflow: 'hidden',
+    position: 'relative'
   },
   video: {
     width: '100%',
-    height: '70%',
+    height: '85%',
   },
 });

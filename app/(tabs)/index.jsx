@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Feed from '../../screens/Feed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
   return (
-    <SafeAreaView>
+    <View style={{flex: 1}}>
       <Feed/>
-    </SafeAreaView>
+    </View>
   );
 }
 

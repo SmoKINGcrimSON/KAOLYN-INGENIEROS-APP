@@ -1,11 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
 import VideoFeed from './VideoFeed';
+import ModalComment from './ModalComment';
 
+/*useContext hooks*/
+export const CommentModalContext = createContext({
+  isVisible: false,
+  setIsVisible: () => {},
+});
+
+/*Video Component itself*/
 const VideoComponent = ({ profileId, videoUri, shouldPlay }) => {
+  const [isCommentSectionVisible, setIsCommentSectionVisible] = useState(false)
 
   const player = useVideoPlayer(videoUri, (player) => {
     player.loop = true;
@@ -48,7 +57,20 @@ const VideoComponent = ({ profileId, videoUri, shouldPlay }) => {
         allowsPictureInPicture
       />
       {/*Video Feed*/}
-      <VideoFeed id={profileId}/>
+      <CommentModalContext.Provider value={{
+        isVisible: isCommentSectionVisible, 
+        setIsVisible: setIsCommentSectionVisible 
+      }}>
+        <VideoFeed id={profileId}/>
+      </CommentModalContext.Provider>
+
+      {/*Comments Modal*/}
+      <CommentModalContext.Provider value={{
+        isVisible: isCommentSectionVisible, 
+        setIsVisible: setIsCommentSectionVisible 
+      }}>
+        <ModalComment/>
+      </CommentModalContext.Provider>
     </View>
   );
 };

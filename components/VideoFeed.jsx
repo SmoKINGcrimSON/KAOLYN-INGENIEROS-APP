@@ -4,8 +4,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import pp1 from '../assets/photos/carlos.jpeg'
 import pp2 from '../assets/photos/edwin.jpeg'
 import pp3 from '../assets/photos/jake.jpg'
-import { useMemo } from 'react';
+import { useMemo, useContext } from 'react';
 import { Link } from 'expo-router';
+import { CommentModalContext } from './VideoComponent'
 
 const profilePictures = [
   { id: '1', videoUri: pp1 },
@@ -14,9 +15,14 @@ const profilePictures = [
 ];
 
 const VideoFeed = ({ id }) => {
+  const { setIsVisible } = useContext(CommentModalContext);
   const profilePic = useMemo(() => {
     return profilePictures.find((p) => p.id === id)?.videoUri || pp1;
   }, [id]);
+
+  const showCommentsModal = () => {
+    setIsVisible(true)
+  }
 
   return (
     <View style={styles.container}>
@@ -40,7 +46,7 @@ const VideoFeed = ({ id }) => {
       </Pressable>
 
       {/* Comments */}
-      <Pressable style={styles.actionButton}>
+      <Pressable style={styles.actionButton} onPress={showCommentsModal}>
         <FontAwesome name="wechat" size={24} color="white" />
         <Text style={styles.counter}>546</Text>
       </Pressable>

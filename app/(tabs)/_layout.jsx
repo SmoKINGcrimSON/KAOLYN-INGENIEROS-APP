@@ -22,9 +22,9 @@ const _layout = () => {
               </View>
             ),
             headerRight: () => (
-              <Link asChild href={'/sign-in'}>
+              <Link asChild href={'/search'}>
                 <Pressable style={{paddingRight: 10}}>
-                  <FontAwesome name="user-o" size={24} color="black" />
+                  <FontAwesome name="search" size={24} color="black" />
                 </Pressable>
               </Link>
             )
@@ -47,6 +47,7 @@ const _layout = () => {
             tabBarIcon: ({ color, size }) => (
                 <FontAwesome name="smile-o" size={24} color="black" />
             ),
+            headerShown: false
         }}
         />
 
@@ -57,6 +58,7 @@ const _layout = () => {
             tabBarIcon: ({ color, size }) => (
                 <FontAwesome name="copyright" size={24} color="black" />
             ),
+            headerShown: false
         }}
         />
 
@@ -67,6 +69,18 @@ const _layout = () => {
             tabBarIcon: ({ color, size }) => (
                 <FontAwesome name="lightbulb-o" size={24} color="black" />
             ),
+            headerShown: false
+        }}
+        />
+
+        <Tabs.Screen
+            name="sign-in"
+            options={{
+            title: "Perfil",
+            tabBarIcon: ({ color, size }) => (
+                <FontAwesome name="user" size={24} color="black" />
+            ),
+            headerShown: false
         }}
         />
 

@@ -5,6 +5,7 @@ import pp1 from '../assets/photos/carlos.jpeg'
 import pp2 from '../assets/photos/edwin.jpeg'
 import pp3 from '../assets/photos/jake.jpg'
 import { useMemo } from 'react';
+import { Link } from 'expo-router';
 
 const profilePictures = [
   { id: '1', videoUri: pp1 },
@@ -20,15 +21,17 @@ const VideoFeed = ({ id }) => {
   return (
     <View style={styles.container}>
       {/* Profile Picture + Add */}
-      <Pressable style={{ alignItems: 'center', position: 'relative' }}>
-        <Image 
-          source={profilePic} 
-          style={styles.profileImage}
-        />
-        <View style={styles.addIconContainer}>
-          <Ionicons name="add" size={14} color="white" />
-        </View>
-      </Pressable>
+      <Link href={'/user_profile'} asChild>
+        <Pressable style={{ alignItems: 'center', position: 'relative' }}>
+          <Image 
+            source={profilePic} 
+            style={styles.profileImage}
+          />
+          <View style={styles.addIconContainer}>
+            <Ionicons name="add" size={14} color="white" />
+          </View>
+        </Pressable>
+      </Link>
 
       {/* Heart */}
       <Pressable style={styles.actionButton}>

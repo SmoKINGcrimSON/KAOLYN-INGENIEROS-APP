@@ -40,12 +40,14 @@ const VideoComponent = ({ profileId, videoUri, shouldPlay }) => {
 
   return (
     <View style={styles.container}>
+      {/*The video itself*/}
       <VideoView
         style={styles.video}
         player={player}
         allowsFullscreen
         allowsPictureInPicture
       />
+      {/*Video Feed*/}
       <VideoFeed id={profileId}/>
     </View>
   );

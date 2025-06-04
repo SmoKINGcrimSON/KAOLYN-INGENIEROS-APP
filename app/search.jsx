@@ -2,22 +2,22 @@ import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-const Asesores = () => {
-  const insets = useSafeAreaInsets()
+const Search = () => {
+    const insets = useSafeAreaInsets()
 
-  return (
-    <View style = {{
+    return (
+        <View style = {{
           paddingTop: insets.top, 
           paddingBottom: insets.bottom,
           paddingLeft: insets.left,
           paddingRight: insets.right
         }}>
-          <StatusBar style='black'/>
-          <Text>Asesores</Text>
-    </View>
-  )
+            <StatusBar style='black'/>
+            <Text>Search component</Text>
+        </View>
+    )
 }
 
-export default Asesores
+export default Search
 
 const styles = StyleSheet.create({})

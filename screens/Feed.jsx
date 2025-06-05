@@ -1,17 +1,9 @@
 import { FlatList, StyleSheet, View, Dimensions } from 'react-native'
-import video1 from "../assets/videos/video-1.mp4"
-import video2 from "../assets/videos/video-2.mp4"
-import video3 from "../assets/videos/video-3.mp4"
 import { useRef, useState } from 'react'
 import VideoComponent from '../components/VideoComponent'
+import { videos } from '../assets/data/data'
 
 const { height, width } = Dimensions.get('window')
-
-const videos = [
-  { id: '1', videoUri: video1, profileId: '1' },
-  { id: '2', videoUri: video2, profileId: '2' },
-  { id: '3', videoUri: video3, profileId: '3' },
-];
 
 const Feed = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -28,7 +20,7 @@ const Feed = () => {
 
   const renderItem = ({ item, index }) => (
   <View style={styles.itemContainer}>
-    <VideoComponent profileId={item.profileId} videoUri={item.videoUri} shouldPlay={index === currentIndex} />
+    <VideoComponent videoid={item.id} userid={item.userid} videoUri={item.videoUri} shouldPlay={index === currentIndex} />
   </View>
 )
 

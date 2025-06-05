@@ -1,74 +1,30 @@
 import { Dimensions, FlatList, Pressable, StyleSheet, View, Text} from 'react-native'
 import ReactNativeModal from 'react-native-modal'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CommentModalContext } from './VideoComponent'
 import Comment from './Comment'
-import jake from '../assets/photos/jake.jpg'
+import { defaultUserIcon, videos } from '../assets/data/data'
+import { users } from '../assets/data/data'
 
-const comments = [
-    {
-        id: 1,
-        usename: 'Fernando',
-        comment: 'what a nice video!',
-        pp: jake
-    },
-    {
-        id: 2,
-        usename: 'Fernando',
-        comment: 'wow what\'s that!!',
-        pp: jake
-    },
-    {
-        id: 3,
-        usename: 'Fernando',
-        comment: 'stop uploading videos to the platform please asdasdasdsadsadasdsadasd asdas dasdasdasdasdasd asdasd',
-        pp: jake
-    },
-    {
-        id: 4,
-        usename: 'Fernando',
-        comment: 'the hell!!!!!',
-        pp: jake
-    },
-    {
-        id: 5,
-        usename: 'Fernando',
-        comment: 'great!!!!!!',
-        pp: jake
-    }, 
-    {
-        id: 6,
-        usename: 'Fernando',
-        comment: 'what a nice video!',
-        pp: jake
-    },
-    {
-        id: 7,
-        usename: 'Fernando',
-        comment: 'wow what\'s that!!',
-        pp: jake
-    },
-    {
-        id: 8,
-        usename: 'Fernando',
-        comment: 'stop uploading videos to the platform please asdasdasdsadsadasdsadasd asdas dasdasdasdasdasd asdasd',
-        pp: jake
-    },
-    {
-        id: 9,
-        usename: 'Fernando',
-        comment: 'the hell!!!!!',
-        pp: jake
-    },
-    {
-        id: 10,
-        usename: 'Fernando',
-        comment: 'great!!!!!!',
-        pp: jake
-    }
-]
+const ModalComment = ({videoid}) => {
+    const [formattedComments, setFormattedComments] = useState([])
 
-const ModalComment = () => {
+    useEffect(() => {
+        const rawComments = videos.find(v => v.id == videoid)?.comments || [];
+
+        const commentsFormatted = rawComments.map(comment => {
+            const user = users.find(u => u.id === comment.userid);
+            return {
+                id: comment.id,
+                username: user?.username || 'Unknown',
+                pp: user?.profilePic || defaultUserIcon,
+                comment: comment.comment
+            };
+        });
+
+        setFormattedComments(commentsFormatted);
+    }, [videoid])
+
     const {width, height} = Dimensions.get('window')
     const {isVisible, setIsVisible } = useContext(CommentModalContext);
 
@@ -110,14 +66,14 @@ const ModalComment = () => {
                     }}>Close</Text>
                 </Pressable>
                 <FlatList
-                    data={comments}
+                    data={formattedComments}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={
                         ({item}) => 
                             <Comment 
                                 pp={item.pp}
                                 comment={item.comment}
-                                username={item.usename}
+                                username={item.username}
                             />
                     }
                     showsVerticalScrollIndicator={true}

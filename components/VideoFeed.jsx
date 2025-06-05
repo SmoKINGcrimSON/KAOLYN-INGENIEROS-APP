@@ -1,28 +1,32 @@
 import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import pp1 from '../assets/photos/carlos.jpeg'
-import pp2 from '../assets/photos/edwin.jpeg'
-import pp3 from '../assets/photos/jake.jpg'
-import { useMemo, useContext } from 'react';
+import { defaultUserIcon } from '../assets/data/data';
+import { users } from '../assets/data/data';
+import { useMemo, useContext, useEffect } from 'react';
 import { Link } from 'expo-router';
 import { CommentModalContext } from './VideoComponent'
+import { videos } from '../assets/data/data';
 
-const profilePictures = [
-  { id: '1', videoUri: pp1 },
-  { id: '2', videoUri: pp2 },
-  { id: '3', videoUri: pp3 },
-];
-
-const VideoFeed = ({ id }) => {
+const VideoFeed = ({ videoid, id }) => {
+  //setVisibility
   const { setIsVisible } = useContext(CommentModalContext);
+  
+  //recover profilePic
   const profilePic = useMemo(() => {
-    return profilePictures.find((p) => p.id === id)?.videoUri || pp1;
+    return users.find((p) => p.id === id)?.profilePic || defaultUserIcon;
   }, [id]);
 
+  //recover metadata from the video
+  const videoInfo = videos.find(v => v.id === videoid)
+  const numberComments = videoInfo.comments.length
+  const numberOfLikes = videoInfo.likes
+
+  //modal functions
   const showCommentsModal = () => {
     setIsVisible(true)
   }
+
 
   return (
     <View style={styles.container}>
@@ -42,13 +46,13 @@ const VideoFeed = ({ id }) => {
       {/* Heart */}
       <Pressable style={styles.actionButton}>
         <FontAwesome name="heart" size={24} color="white" />
-        <Text style={styles.counter}>1K</Text>
+        <Text style={styles.counter}>{numberOfLikes}</Text>
       </Pressable>
 
       {/* Comments */}
       <Pressable style={styles.actionButton} onPress={showCommentsModal}>
         <FontAwesome name="wechat" size={24} color="white" />
-        <Text style={styles.counter}>546</Text>
+        <Text style={styles.counter}>{numberComments}</Text>
       </Pressable>
     </View>
   );

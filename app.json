@@ -21,7 +21,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.galaxies.firebase"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -29,7 +30,8 @@
     },
     "plugins": [
       "expo-video",
-      "expo-router"
+      "expo-router",
+      ["expo-build-properties"]
     ]
   }
 }

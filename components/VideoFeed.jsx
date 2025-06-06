@@ -2,25 +2,21 @@ import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { defaultUserIcon } from '../assets/data/data';
-import { users } from '../assets/data/data';
-import { useMemo, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Link } from 'expo-router';
 import { CommentModalContext } from './VideoComponent'
-import { videos } from '../assets/data/data';
+import { videos, users} from '../assets/data/data';
 
-const VideoFeed = ({ videoid, id }) => {
+const VideoFeed = ({ videoid }) => {
   //setVisibility
   const { setIsVisible } = useContext(CommentModalContext);
-  
-  //recover profilePic
-  const profilePic = useMemo(() => {
-    return users.find((p) => p.id === id)?.profilePic || defaultUserIcon;
-  }, [id]);
 
   //recover metadata from the video
   const videoInfo = videos.find(v => v.id === videoid)
+  const userId = videoInfo.userid
   const numberComments = videoInfo.comments.length
   const numberOfLikes = videoInfo.likes
+  const profilePic = users.find(u => u.id === userId).profilePic || defaultUserIcon
 
   //modal functions
   const showCommentsModal = () => {

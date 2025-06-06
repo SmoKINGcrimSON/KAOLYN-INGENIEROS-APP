@@ -20,7 +20,7 @@ const Feed = () => {
 
   const renderItem = ({ item, index }) => (
   <View style={styles.itemContainer}>
-    <VideoComponent videoid={item.id} userid={item.userid} videoUri={item.videoUri} shouldPlay={index === currentIndex} />
+    <VideoComponent videoid={item.id} videoUri={item.videoUri} shouldPlay={index === currentIndex} />
   </View>
 )
 

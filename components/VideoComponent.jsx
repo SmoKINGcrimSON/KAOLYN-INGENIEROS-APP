@@ -13,7 +13,7 @@ export const CommentModalContext = createContext({
 });
 
 /*Video Component itself*/
-const VideoComponent = ({ videoid, userid, videoUri, shouldPlay }) => {
+const VideoComponent = ({ videoid, videoUri, shouldPlay }) => {
   const [isCommentSectionVisible, setIsCommentSectionVisible] = useState(false)
 
   const player = useVideoPlayer(videoUri, (player) => {
@@ -61,7 +61,7 @@ const VideoComponent = ({ videoid, userid, videoUri, shouldPlay }) => {
         isVisible: isCommentSectionVisible, 
         setIsVisible: setIsCommentSectionVisible 
       }}>
-        <VideoFeed videoid={videoid} id={userid}/>
+        <VideoFeed videoid={videoid}/>
       </CommentModalContext.Provider>
 
       {/*Comments Modal*/}

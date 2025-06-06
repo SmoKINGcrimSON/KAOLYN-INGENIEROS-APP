@@ -109,7 +109,16 @@ export const videos = [
     videoUri: video3, 
     userid: '3',
     comments: [
-
+        {
+            id: '1',
+            userid: '2',
+            comment: 'bro be more careful you can injured someone!'
+        },
+        {
+            id: '2',
+            userid: '3',
+            comment: 'bicy bicy so spicy'
+        }
     ] 
     },
 ];

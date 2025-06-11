@@ -122,3 +122,56 @@ export const videos = [
     ] 
     },
 ];
+
+export const asesores=[
+    {
+        id: 1,
+        name: "Matías Quisquisiban",
+        profilePic: profilePic1
+    },
+    {
+        id: 2,
+        name: "Elías Martínez",
+        profilePic: profilePic2
+    },
+    {
+        id: 3,
+        name: "Néstor Valles",
+        profilePic: profilePic3
+    },
+    {
+        id: 4,
+        name: "Abraham Gómez",
+        profilePic: profilePic1
+    },
+    {
+        id: 5,
+        name: "Matías Quisquisiban",
+        profilePic: profilePic1
+    },
+    {
+        id: 6,
+        name: "Elías Martínez",
+        profilePic: profilePic2
+    },
+    {
+        id: 7,
+        name: "Néstor Valles",
+        profilePic: profilePic3
+    },
+    {
+        id: 8,
+        name: "Abraham Gómez",
+        profilePic: profilePic1
+    },
+    {
+        id: 9,
+        name: "Néstor Valles",
+        profilePic: profilePic3
+    },
+    {
+        id: 10,
+        name: "Abraham Gómez",
+        profilePic: profilePic1
+    }
+]
